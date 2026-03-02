@@ -31,7 +31,6 @@ fi
 
 echo "🗑️  Borrando archivos de configuración y certificados"
 rm -rf ./base/certs
-rm -f ./base/gateway/nginx.conf
 
 echo "📂 Limpiando archivos de configuración en proyectos Laravel..."
 rm -f ./landing/apache.conf

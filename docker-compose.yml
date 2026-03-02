@@ -1,4 +1,12 @@
 services:
+  # Este lo utilizo para administrar mysql
+  adminer:
+    image: adminer
+    container_name: adminer_db
+    restart: always
+    ports:
+      - "8080:8080"
+
   gateway:
     image: nginx:alpine
     container_name: nginx_gateway
@@ -22,6 +30,10 @@ services:
   mongodb:
     image: mongo:5.0
     container_name: mongo_db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+      - MONGO_INITDB_DATABASE=tipsterpage-dev
     platform: linux/arm64
     ports:
       - "27017:27017"
@@ -61,8 +73,13 @@ services:
       dockerfile: landing/Dockerfile
     volumes:
       - ./landing:/var/www/html
+      - /var/www/html/vendor
+      - ./base/apache/certs:/etc/apache2/ssl:ro
     depends_on:
       - redis
+    extra_hosts:
+      - "app.affiliabet.test:host-gateway"
+      - "pikachu.test:host-gateway"
 
   affiliabet:
     container_name: affiliabet_laravel
@@ -71,6 +88,8 @@ services:
       dockerfile: affiliabet/Dockerfile
     volumes:
       - ./affiliabet:/var/www/html
+      - /var/www/html/vendor
+      - ./base/apache/certs:/etc/apache2/ssl:ro
     depends_on:
       - redis
       - mysql_db
@@ -109,7 +128,7 @@ services:
     container_name: apipikachu
     build:
       context: .
-      dockerfile: pikachu-api/Dockerfile
+      dockerfile: apipikachu/Dockerfile
     environment:
       - MONGO_URI=mongodb://mongodb:27017/tipsterpage-dev
     ports:
@@ -145,6 +164,7 @@ services:
     volumes:
       - ./backend:/app
       - /app/functions/node_modules
+      - ./base/apache/certs:/etc/apache2/ssl:ro
       - /app/functions/lib
     depends_on:
       - redis

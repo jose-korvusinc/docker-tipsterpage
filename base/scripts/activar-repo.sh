@@ -10,6 +10,7 @@ fi
 if [[ "$PROJECT_NAME" == "landing" || "$PROJECT_NAME" == "affiliabet" ]]; then
     mkdir -p "./$PROJECT_NAME"
     cat <<EOF > "./$PROJECT_NAME/apache.conf"
+ServerName localhost
 <VirtualHost *:80>
     ServerName ${DOMAIN_NAME}
     DocumentRoot /var/www/html/public

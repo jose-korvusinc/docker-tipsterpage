@@ -1,0 +1,21 @@
+[submodule "admin"]
+	path = admin
+	url = https://github.com/pedro-korvus/tipsterpage-admin
+[submodule "apibagon"]
+	path = apibagon
+	url = https://github.com/jose-korvusinc/tipsterpage_apibagon
+[submodule "apiekans"]
+	path = apiekans
+	url = https://github.com/jose-korvusinc/tipsterpage_apiekans
+[submodule "backend"]
+	path = backend
+	url = https://github.com/pedro-korvus/tipsterpage-backend
+[submodule "landing"]
+	path = landing
+	url = https://github.com/jose-korvusinc/tipsterpage-landing
+[submodule "apipikachu"]
+	path = apipikachu
+	url = https://github.com/pedro-korvus/pikachu-api
+[submodule "affiliabet"]
+	path = affiliabet
+	url = https://github.com/jose-korvusinc/affiliabetBackoffice
